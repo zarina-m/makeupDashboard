@@ -31,6 +31,20 @@ nav li a:hover {
     color: white;
 }
 
+.logoSlot {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: white;
+    text-transform: lowercase;
+    font-style: italic;
+}
+
+.logoSlot h1 span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 .linksSlot, .searchSlot {
     width: 100%;
     max-width: 100%;
@@ -42,7 +56,7 @@ nav li a:hover {
 }
 
 .searchSlot input {
-    height: 50%;
+    height: 75%;
 }
 
 .carouselPreview {
