@@ -9,6 +9,12 @@ namespace makeupDashboard.Models
     public partial class makeupDBContext : DbContext
     {
         static string connectionString {get;set;} = Environment.GetEnvironmentVariable("MAKEUP", EnvironmentVariableTarget.Process);
+
+        static makeupDBContext() 
+        {
+            connectionString = connectionString ?? Environment.GetEnvironmentVariable("MAKEUP", EnvironmentVariableTarget.Machine);
+        }
+        
         public makeupDBContext()
         {
         }
