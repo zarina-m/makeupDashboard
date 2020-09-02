@@ -20,6 +20,9 @@ namespace makeupDashboard.Controllers
 
         public IActionResult Index()
         {
+            var x = new makeupDBContext();
+
+            var prods = x.Products.ToList();
             return View();
         }
 
