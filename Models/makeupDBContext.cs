@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
 
 namespace makeupDashboard.Models
 {
@@ -14,7 +12,7 @@ namespace makeupDashboard.Models
         {
             connectionString = connectionString ?? Environment.GetEnvironmentVariable("MAKEUP", EnvironmentVariableTarget.Machine);
         }
-        
+
         public makeupDBContext()
         {
         }
@@ -38,46 +36,55 @@ namespace makeupDashboard.Models
         {
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                entity.HasKey(e => new { e.Retailer, e.ProductId, e.SkuId })
+                    .HasName("PK__Products__8EE018CD5507931F");
+
+                entity.Property(e => e.Retailer)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProductId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SkuId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.AddedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Brand)
                     .IsRequired()
-                    .HasMaxLength(255)
+                    .HasMaxLength(1024)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Colour)
-                    .HasMaxLength(255)
+                entity.Property(e => e.Color)
+                    .HasMaxLength(1024)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImageUrl)
                     .IsRequired()
-                    .HasColumnName("ImageURL")
                     .HasMaxLength(2083)
                     .IsUnicode(false);
 
-                entity.Property(e => e.NewPrice).HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.ListPrice).HasColumnType("decimal(19, 4)");
 
-                entity.Property(e => e.OriginalPrice).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.Name)
+                entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasColumnName("Name")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Retailer)
-                    .IsRequired()
-                    .HasMaxLength(255)
+                    .HasMaxLength(1024)
                     .IsUnicode(false);
 
                 entity.Property(e => e.SaleDate).HasColumnType("datetime");
 
+                entity.Property(e => e.SalePrice).HasColumnType("decimal(19, 4)");
+
                 entity.Property(e => e.Size)
-                    .HasMaxLength(255)
+                    .HasMaxLength(1024)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Url)
+                    .IsRequired()
+                    .HasMaxLength(2083)
                     .IsUnicode(false);
             });
 
